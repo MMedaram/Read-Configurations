@@ -19,11 +19,10 @@ public class DefinedProperties {
 		
 		logger.info("Loading a properties file from the file system");
 		
-		try (InputStream input = DefinedProperties.class.getClassLoader().getResourceAsStream(propertyFile);){
-
+		try {
+			InputStream input = DefinedProperties.class.getResourceAsStream("/resources/" +propertyFile);
 			if (input == null) {
-				logger.info("Sorry, unable to find properties file");
-				return;
+				input = DefinedProperties.class.getClassLoader().getResourceAsStream(propertyFile);
 			}
 			//load a properties file from class path, inside static method
 			prop.load(input);
